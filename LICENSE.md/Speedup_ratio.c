@@ -3,17 +3,18 @@
 
 int main ()
 {
-	int i,j,num;
+	int i,j,num,k;
 	double serial_time;
 	double start, finish;
 //串行部分
 	FILE *fp = NULL;
 	fp = fopen("0.txt","w");
 	start = omp_get_wtime();
-	int k=0;
-	for (i=2; i<100000; i++)
+	k=0;
+	
+	for (i=2; i<1000000; i++)
 	{
-		int num = 0;
+		num = 0;
 		for ( j = 1;j<=i;j++)
 			{
 			if(i%j == 0) 
@@ -21,16 +22,17 @@ int main ()
 			}
 		if (num <= 2)
 			{
-			k+=1
 			fprintf(fp,"%d ",i);
+			k+=1;
+			//printf("%d ",k);
 			}
 	}
 	fclose(fp);
 	finish = omp_get_wtime();
 	serial_time = (double)(finish-start);
-	printf ("\n所有的素数个数：");
-	printf ("%d \n",k);
-	printf ("\n串行所运行时间：");
+	printf("\n素数的个数：");
+	printf("%d ",k);
+	printf("\n串行所运行时间：");
 	printf("%8.6lfs\n",serial_time);
 	
 //并行部分
@@ -39,7 +41,7 @@ int main ()
 	fp = fopen("1.txt","w");
 	#pragma omp parallel num_threads(1)
 	#pragma omp parallel for private(num)
-	for(i = 2; i <= 100000; i++){
+	for(i = 2; i <= 1000000; i++){
         int num = 0;
         //#pragma omp parallel for reduction(+:num)
         for(j = 1; j <= i; j++)
@@ -63,7 +65,7 @@ int main ()
 	fp = fopen("2.txt","w");
 	#pragma omp parallel num_threads(2)
 	#pragma omp parallel for private(num)
-	for(i = 2; i <= 100000; i++){
+	for(i = 2; i <= 1000000; i++){
         int num = 0;
         #pragma omp parallel for reduction(+:num)
         for(j = 1; j <= i; j++)
@@ -87,7 +89,7 @@ int main ()
 	fp = fopen("3.txt","w");
 	#pragma omp parallel num_threads(3)
 	#pragma omp parallel for private(num)
-	for(i = 2; i <= 100000; i++){
+	for(i = 2; i <= 1000000; i++){
         int num = 0;
         #pragma omp parallel for reduction(+:num)
         for(j = 1; j <= i; j++)
@@ -112,7 +114,7 @@ int main ()
 	fp = fopen("4.txt","w");
 	#pragma omp parallel num_threads(4)
 	#pragma omp parallel for private(num)
-	for(i = 2; i <= 100000; i++){
+	for(i = 2; i <= 1000000; i++){
         int num = 0;
         #pragma omp parallel for reduction(+:num)
         for(j = 1; j <= i; j++)
@@ -137,7 +139,7 @@ int main ()
 	fp = fopen("5.txt","w");
 	#pragma omp parallel num_threads(5)
 	#pragma omp parallel for private(num)
-	for(i = 2; i <= 100000; i++){
+	for(i = 2; i <= 1000000; i++){
         int num = 0;
         #pragma omp parallel for reduction(+:num)
         for(j = 1; j <= i; j++)
@@ -162,7 +164,7 @@ int main ()
 	fp = fopen("6.txt","w");
 	#pragma omp parallel num_threads(6)
 	#pragma omp parallel for private(num)
-	for(i = 2; i <= 100000; i++){
+	for(i = 2; i <= 1000000; i++){
         int num = 0;
         #pragma omp parallel for reduction(+:num)
         for(j = 1; j <= i; j++)
@@ -186,7 +188,7 @@ int main ()
 	fp = fopen("7.txt","w");
 	#pragma omp parallel num_threads(7)
 	#pragma omp parallel for private(num)
-	for(i = 2; i <= 100000; i++){
+	for(i = 2; i <= 1000000; i++){
         int num = 0;
         #pragma omp parallel for reduction(+:num)
         for(j = 1; j <= i; j++)
@@ -211,7 +213,7 @@ int main ()
 	fp = fopen("8.txt","w");
 	#pragma omp parallel num_threads(8)
 	#pragma omp parallel for private(num)
-	for(i = 2; i <= 100000; i++){
+	for(i = 2; i <= 1000000; i++){
         int num = 0;
         #pragma omp parallel for reduction(+:num)
         for(j = 1; j <= i; j++)
