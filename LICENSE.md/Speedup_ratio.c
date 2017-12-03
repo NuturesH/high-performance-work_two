@@ -10,6 +10,7 @@ int main ()
 	FILE *fp = NULL;
 	fp = fopen("0.txt","w");
 	start = omp_get_wtime();
+	int k=0;
 	for (i=2; i<100000; i++)
 	{
 		int num = 0;
@@ -20,12 +21,15 @@ int main ()
 			}
 		if (num <= 2)
 			{
+			k+=1
 			fprintf(fp,"%d ",i);
 			}
 	}
 	fclose(fp);
 	finish = omp_get_wtime();
 	serial_time = (double)(finish-start);
+	printf ("\n所有的素数个数：");
+	printf ("%d \n",k);
 	printf ("\n串行所运行时间：");
 	printf("%8.6lfs\n",serial_time);
 	
